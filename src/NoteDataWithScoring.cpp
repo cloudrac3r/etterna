@@ -1,12 +1,12 @@
 #include "global.h"
-#include "NoteDataWithScoring.h"
-#include "NoteData.h"
-#include "PlayerStageStats.h"
 #include "Game.h"
 #include "GameConstantsAndTypes.h"
 #include "GameState.h"
-#include "ThemeMetric.h"
+#include "NoteData.h"
+#include "NoteDataWithScoring.h"
+#include "PlayerStageStats.h"
 #include "RageLog.h"
+#include "ThemeMetric.h"
 #include "TimingData.h"
 
 namespace
@@ -95,7 +95,7 @@ int MinTapNoteScoreTrack( const NoteData &in, unsigned iRow, PlayerNumber pn )
 }
 #endif
 
-}
+} // namespace
 
 const TapNote &NoteDataWithScoring::LastTapNoteWithResult( const NoteData &in, unsigned iRow, PlayerNumber plnum )
 {
@@ -206,12 +206,12 @@ static void DoRowEndRadarActualCalc(garv_state& state, RadarValues& out)
 	{
 		if(state.num_notes_on_curr_row >= 1)
 		{
-			state.taps_hit+= (state.last_tns_on_row >= state.taps_tns);
+			state.taps_hit+= static_cast<int>(state.last_tns_on_row >= state.taps_tns);
 		}
 		if(state.num_notes_on_curr_row >= 2)
 		{
-			state.jumps_hit_for_air+= (state.last_tns_on_row >= state.air_tns);
-			state.jumps_hit+= (state.last_tns_on_row >= state.jumps_tns);
+			state.jumps_hit_for_air+= static_cast<int>(state.last_tns_on_row >= state.air_tns);
+			state.jumps_hit+= static_cast<int>(state.last_tns_on_row >= state.jumps_tns);
 		}
 		if(state.num_notes_on_curr_row + (state.hold_ends.size() -
 				state.num_holds_on_curr_row) >= 3)

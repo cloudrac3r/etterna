@@ -1,15 +1,15 @@
 #include "global.h"
-#include "LifeMeterTime.h"
-#include "ThemeManager.h"
-#include "Song.h"
-#include "Steps.h"
 #include "ActorUtil.h"
-#include "Preference.h"
-#include "StreamDisplay.h"
 #include "GameState.h"
-#include "StatsManager.h"
-#include "PlayerState.h"
+#include "LifeMeterTime.h"
 #include "MessageManager.h"
+#include "PlayerState.h"
+#include "Preference.h"
+#include "Song.h"
+#include "StatsManager.h"
+#include "Steps.h"
+#include "StreamDisplay.h"
+#include "ThemeManager.h"
 
 const float FULL_LIFE_SECONDS = 1.5f*60;
 

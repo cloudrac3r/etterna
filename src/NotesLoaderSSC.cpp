@@ -1,10 +1,10 @@
 #include "global.h"
-#include "NotesLoaderSSC.h"
 #include "BackgroundUtil.h"
 #include "GameManager.h"
 #include "MsdFile.h" // No JSON here.
 #include "NoteTypes.h"
 #include "NotesLoaderSM.h" // For programming shortcuts.
+#include "NotesLoaderSSC.h"
 #include "RageFileManager.h"
 #include "RageLog.h"
 #include "RageUtil.h"
@@ -1188,7 +1188,7 @@ bool SSCLoader::LoadEditFromMsd(const MsdFile &msd,
 		{
 			if(sValueName == "SONG")
 			{
-				if(pSong)
+				if(pSong != nullptr)
 				{
 					/* LOG->UserLog("Edit file", sEditFilePath, "has more than one #SONG tag.");
 						 return false; */

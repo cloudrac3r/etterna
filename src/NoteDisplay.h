@@ -3,9 +3,9 @@
 
 #include "ActorFrame.h"
 #include "CubicSpline.h"
+#include "GameInput.h"
 #include "NoteData.h"
 #include "PlayerNumber.h"
-#include "GameInput.h"
 
 class Sprite;
 class Model;

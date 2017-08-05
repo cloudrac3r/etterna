@@ -6,8 +6,8 @@
  */
 
 #include "global.h"
-#include "RageTexturePreloader.h"
 #include "RageTextureManager.h"
+#include "RageTexturePreloader.h"
 
 RageTexturePreloader &RageTexturePreloader::operator=( const RageTexturePreloader &rhs )
 {

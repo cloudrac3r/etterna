@@ -1,13 +1,13 @@
 #include "global.h"
 
-#include "PercentageDisplay.h"
-#include "GameState.h"
-#include "ThemeManager.h"
-#include "PrefsManager.h"
 #include "ActorUtil.h"
+#include "GameState.h"
+#include "PercentageDisplay.h"
+#include "PlayerState.h"
+#include "PrefsManager.h"
 #include "RageLog.h"
 #include "StageStats.h"
-#include "PlayerState.h"
+#include "ThemeManager.h"
 #include "XmlFile.h"
 
 

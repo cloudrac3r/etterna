@@ -3,9 +3,9 @@
 #ifndef ROOM_WHEEL_H
 #define ROOM_WHEEL_H
 
+#include "ThemeMetric.h"
 #include "WheelBase.h"
 #include "WheelItemBase.h"
-#include "ThemeMetric.h"
 
 struct RoomWheelItemData : public WheelItemBaseData
 {

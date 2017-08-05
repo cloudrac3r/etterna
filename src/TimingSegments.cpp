@@ -1,6 +1,6 @@
 #include "global.h"
-#include "TimingSegments.h"
 #include "EnumHelper.h"
+#include "TimingSegments.h"
 
 const double TimingSegment::EPSILON = 1e-6;
 

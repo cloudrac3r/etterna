@@ -1,18 +1,18 @@
 #include "global.h"
-#include "StepMania.h"
-#include "arch/Dialog/Dialog.h"
-#include "GameManager.h"
+#include "Foreach.h"
+#include "Game.h"
 #include "GameConstantsAndTypes.h"
 #include "GameInput.h"	// for GameButton constants
 #include "GameLoop.h"  // for ChangeGame
-#include "RageLog.h"
-#include "RageUtil.h"
+#include "GameManager.h"
 #include "NoteSkinManager.h"
 #include "RageInputDevice.h"
-#include "ThemeManager.h"
-#include "Game.h"
+#include "RageLog.h"
+#include "RageUtil.h"
+#include "StepMania.h"
 #include "Style.h"
-#include "Foreach.h"
+#include "ThemeManager.h"
+#include "arch/Dialog/Dialog.h"
 
 GameManager*	GAMEMAN = NULL;	// global and accessible from anywhere in our program
 
@@ -2767,7 +2767,7 @@ GameManager::~GameManager()
 
 void GameManager::GetStylesForGame( const Game *pGame, vector<const Style*>& aStylesAddTo, bool editor )
 {
-	for( int s=0; pGame->m_apStyles[s]; ++s ) 
+	for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 	{
 		const Style *style = pGame->m_apStyles[s];
 		if( !editor && !style->m_bUsedForGameplay )	
@@ -2783,7 +2783,7 @@ const Game *GameManager::GetGameForStyle( const Style *pStyle )
 {
 	for(auto pGame : g_Games)
 	{
-			for( int s=0; pGame->m_apStyles[s]; ++s ) 
+			for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 		{
 			if( pGame->m_apStyles[s] == pStyle )
 				return pGame;
@@ -2796,7 +2796,7 @@ const Style* GameManager::GetEditorStyleForStepsType( StepsType st )
 {
 	for(auto pGame : g_Games)
 	{
-			for( int s=0; pGame->m_apStyles[s]; ++s ) 
+			for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 		{
 			const Style *style = pGame->m_apStyles[s];
 			if( style->m_StepsType == st && style->m_bUsedForEdit )
@@ -2811,7 +2811,7 @@ const Style* GameManager::GetEditorStyleForStepsType( StepsType st )
 
 void GameManager::GetStepsTypesForGame( const Game *pGame, vector<StepsType>& aStepsTypeAddTo )
 {
-	for( int i=0; pGame->m_apStyles[i]; ++i )
+	for( int i=0; pGame->m_apStyles[i] != nullptr; ++i )
 	{
 		StepsType st = pGame->m_apStyles[i]->m_StepsType;
 		ASSERT(st < NUM_StepsType);
@@ -2831,7 +2831,7 @@ void GameManager::GetDemonstrationStylesForGame( const Game *pGame, vector<const
 {
 	vpStylesOut.clear();
 
-	for( int s=0; pGame->m_apStyles[s]; ++s ) 
+	for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 	{
 		const Style *style = pGame->m_apStyles[s];
 		if( style->m_bUsedForDemonstration )
@@ -2843,7 +2843,7 @@ void GameManager::GetDemonstrationStylesForGame( const Game *pGame, vector<const
 
 const Style* GameManager::GetHowToPlayStyleForGame( const Game *pGame )
 {
-	for( int s=0; pGame->m_apStyles[s]; ++s ) 
+	for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 	{
 		const Style *style = pGame->m_apStyles[s];
 		if( style->m_bUsedForHowToPlay )
@@ -2874,7 +2874,7 @@ void GameManager::GetCompatibleStyles( const Game *pGame, int iNumPlayers, vecto
 		if( iNumPlayers != iNumPlayersRequired )
 			continue;
 
-		for( int s=0; pGame->m_apStyles[s]; ++s ) 
+		for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 		{
 			const Style *style = pGame->m_apStyles[s];
 			if( style->m_StyleType != styleType )
@@ -3024,7 +3024,7 @@ public:
 	static int IsGameEnabled( T* p, lua_State *L )
 	{
 		const Game *pGame = p->StringToGame(SArg(1));
-		if(pGame)
+		if(pGame != nullptr)
 			lua_pushboolean(L, p->IsGameEnabled( pGame ) );
 		else
 			lua_pushnil(L);
@@ -3035,13 +3035,13 @@ public:
 	{
 		RString game_name= SArg(1);
 		const Game *pGame = p->StringToGame(game_name);
-		if(!pGame)
+		if(pGame == nullptr)
 		{
 			luaL_error(L, "GetStylesForGame: Invalid Game: '%s'", game_name.c_str());
 		}
 		vector<Style*> aStyles;
 		lua_createtable(L, 0, 0);
-		for( int s=0; pGame->m_apStyles[s]; ++s ) 
+		for( int s=0; pGame->m_apStyles[s] != nullptr; ++s ) 
 		{
 			auto *pStyle = const_cast<Style *>( pGame->m_apStyles[s] );
 			pStyle->PushSelf(L);
@@ -3066,7 +3066,7 @@ public:
 	{
 		RString game_name= SArg(1);
 		const Game *pGame = p->StringToGame(game_name);
-		if(!pGame)
+		if(pGame == nullptr)
 		{
 			luaL_error(L, "SetGame: Invalid Game: '%s'", game_name.c_str());
 		}

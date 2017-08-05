@@ -1,10 +1,10 @@
 #ifndef BPM_DISPLAY_H
 #define BPM_DISPLAY_H
 
-#include "BitmapText.h"
 #include "AutoActor.h"
-#include "ThemeMetric.h"
+#include "BitmapText.h"
 #include "LocalizedString.h"
+#include "ThemeMetric.h"
 class Song;
 class Steps;
 struct DisplayBpms;

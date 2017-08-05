@@ -39,9 +39,9 @@
 
 #include "global.h"
 #include "RageFileDriverReadAhead.h"
+#include "RageFileManager_ReadAhead.h"
 #include "RageLog.h"
 #include "RageUtil.h"
-#include "RageFileManager_ReadAhead.h"
 
 #if defined(HAVE_FCNTL_H)
 #include <fcntl.h>

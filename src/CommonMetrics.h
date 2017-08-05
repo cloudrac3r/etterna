@@ -1,11 +1,11 @@
 #ifndef COMMON_METRICS_H
 #define COMMON_METRICS_H
 
-#include "ThemeMetric.h"
-#include "PlayerNumber.h"
 #include "Difficulty.h"
 #include "GameConstantsAndTypes.h"
 #include "LocalizedString.h"
+#include "PlayerNumber.h"
+#include "ThemeMetric.h"
 
 // Types
 class ThemeMetricDifficultiesToShow : public ThemeMetric<RString>

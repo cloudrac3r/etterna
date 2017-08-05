@@ -3,8 +3,8 @@
 #ifndef RAGE_SOUND_READER_WAV_H
 #define RAGE_SOUND_READER_WAV_H
 
-#include "RageSoundReader_FileReader.h"
 #include "RageFile.h"
+#include "RageSoundReader_FileReader.h"
 
 struct WavReader;
 

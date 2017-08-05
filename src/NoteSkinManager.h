@@ -2,10 +2,10 @@
 #define NOTE_SKIN_MANAGER_H
 
 #include "Actor.h"
-#include "RageTypes.h"
-#include "PlayerNumber.h"
 #include "GameInput.h"
 #include "IniFile.h"
+#include "PlayerNumber.h"
+#include "RageTypes.h"
 
 struct Game;
 struct NoteSkinData;

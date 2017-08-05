@@ -1,9 +1,9 @@
 #include "global.h"
-#include "PlayerAI.h"
-#include "RageUtil.h"
-#include "IniFile.h"
 #include "GameState.h"
+#include "IniFile.h"
+#include "PlayerAI.h"
 #include "PlayerState.h"
+#include "RageUtil.h"
 
 #define AI_PATH "Data/AI.ini"
 
@@ -42,7 +42,7 @@ struct TapScoreDistribution
 		{
 			fCumulativePercent += fPercent[i];
 			if( fRand <= fCumulativePercent+1e-4 ) // rounding error
-				return (TapNoteScore)i;
+				return static_cast<TapNoteScore>(i);
 		}
 		// the fCumulativePercents must sum to 1.0, so we should never get here!
 		ASSERT_M( 0, ssprintf("%f,%f",fRand,fCumulativePercent) );

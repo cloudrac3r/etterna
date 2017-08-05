@@ -1,9 +1,9 @@
 #include "global.h"
 #if !defined(WITHOUT_NETWORKING)
-#include "RoomInfoDisplay.h"
 #include "ActorUtil.h"
-#include "NetworkSyncManager.h"
 #include "LocalizedString.h"
+#include "NetworkSyncManager.h"
+#include "RoomInfoDisplay.h"
 
 AutoScreenMessage( SM_RoomInfoRetract );
 AutoScreenMessage( SM_RoomInfoDeploy );

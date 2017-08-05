@@ -1,10 +1,10 @@
 #include "global.h"
-#include "LifeMeterBattery.h"
-#include "GameState.h"
-#include "ThemeManager.h"
-#include "Steps.h"
-#include "PlayerState.h"
 #include "ActorUtil.h"
+#include "GameState.h"
+#include "LifeMeterBattery.h"
+#include "PlayerState.h"
+#include "Steps.h"
+#include "ThemeManager.h"
 
 LifeMeterBattery::LifeMeterBattery()
 {

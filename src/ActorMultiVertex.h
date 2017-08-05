@@ -62,8 +62,8 @@ public:
 	{
 		if(AMV_Tweens.empty())
 		{ return AMV_current; }
-		else
-		{ return AMV_Tweens.back(); }
+		
+		return AMV_Tweens.back(); 
 	}
 	const AMV_TweenState& AMV_DestTweenState() const { return const_cast<ActorMultiVertex*>(this)->AMV_DestTweenState(); }
 

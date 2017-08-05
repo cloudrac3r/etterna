@@ -1,12 +1,12 @@
 /* MAD is available from: http://www.underbit.com/products/mad/ */
 
 #include "global.h"
-#include "RageSoundReader_MP3.h"
 #include "RageLog.h"
+#include "RageSoundReader_MP3.h"
 #include "RageUtil.h"
 
-#include <cstdio>
 #include <cerrno>
+#include <cstdio>
 #include <map>
 
 #include "mad.h"
@@ -103,14 +103,14 @@ signed long id3_tag_query( const unsigned char *data, id3_length_t length )
 	case TAGTYPE_ID3V2:
 		parse_header(&data, &version, &flags, &size);
 
-		if (flags & ID3_TAG_FLAG_FOOTERPRESENT)
+		if ((flags & ID3_TAG_FLAG_FOOTERPRESENT) != 0)
 			size += 10;
 
 		return 10 + size;
 
 	case TAGTYPE_ID3V2_FOOTER:
 		parse_header(&data, &version, &flags, &size);
-		return -(int)size - 10;
+		return -static_cast<int>(size) - 10;
 
 	case TAGTYPE_NONE:
 		break;
@@ -176,7 +176,7 @@ struct madlib_t
 		memset( &Frame, 0, sizeof(Frame) );
 		memset( &Synth, 0, sizeof(Synth) );
 		Timer = mad_timer_zero;
-		timer_accurate = false;
+		timer_accurate = 0;
 		inbuf_filepos = 0;
 		filesize = 0;
 		header_bytes = 0;
@@ -298,7 +298,7 @@ bool RageSoundReader_MP3::handle_first_frame()
 
 		mad->header_bytes = max( mad->header_bytes, get_this_frame_byte(mad) );
 
-		mad->has_xing = true;
+		mad->has_xing = 1;
 
 		mad_timer_t tm = mad->Frame.header.duration;
 		/* XXX: does this include the Xing header itself? */
@@ -308,7 +308,7 @@ bool RageSoundReader_MP3::handle_first_frame()
 		/* XXX: an id3v2 footer tag would throw this off a little. This also assumes
 		 * the Xing tag is the last header; it always is, I think. */
 		int bytes = mad->filesize - mad->header_bytes;
-		mad->bitrate = (int)(bytes * 8 / (mad->length/1000.f));
+		mad->bitrate = static_cast<int>(bytes * 8 / (mad->length/1000.f));
 
 		if( mad->xingtag.type == xing::XING )
 			ret = true;
@@ -362,7 +362,7 @@ void fill_frame_index_cache( madlib_t *mad )
 	int pos;
 
 	/* Only update the frame cache if our timer is consistent. */
-	if(!mad->timer_accurate) return;
+	if(mad->timer_accurate == 0) return;
 
 	/* the frame we just decoded: */
 	pos = get_this_frame_byte(mad);
@@ -422,7 +422,7 @@ int RageSoundReader_MP3::do_mad_frame_decode( bool headers_only )
 			const int tagsize = id3_tag_query(mad->Stream.this_frame,
 				mad->Stream.bufend - mad->Stream.this_frame);
 
-			if( tagsize )
+			if( tagsize != 0 )
 			{
 				mad_stream_skip(&mad->Stream, tagsize);
 
@@ -446,10 +446,10 @@ int RageSoundReader_MP3::do_mad_frame_decode( bool headers_only )
 			ret = 0; /* pretend success */
 		}
 
-		if( !ret )
+		if( ret == 0 )
 		{
 			/* OK. */
-			if( mad->first_frame )
+			if( mad->first_frame != 0 )
 			{
 				/* We're at the beginning.  Is this a Xing tag? */
 				if(handle_first_frame())
@@ -464,7 +464,7 @@ int RageSoundReader_MP3::do_mad_frame_decode( bool headers_only )
 				 * currently decoded frame.  Don't increment mad->Timer on the first frame,
 				 * or it'll be the time of the *next* frame.  (All frames have the same
 				 * duration.) */
-				mad->first_frame = false;
+				mad->first_frame = 0;
 				mad->Timer = mad_timer_zero;
 				mad->header_bytes = get_this_frame_byte(mad);
 			}
@@ -611,10 +611,10 @@ RageSoundReader_MP3::RageSoundReader_MP3()
 	mad->length = -1;
 	mad->inbuf_filepos = 0;
 	mad->header_bytes = 0;
-	mad->has_xing = false;
+	mad->has_xing = 0;
 	mad->timer_accurate = 1;
 	mad->bitrate = -1;
-	mad->first_frame = true;
+	mad->first_frame = 1;
 }
 
 RageSoundReader_MP3::~RageSoundReader_MP3()
@@ -663,8 +663,8 @@ RageSoundReader_FileReader::OpenResult RageSoundReader_MP3::Open( RageFileBasic 
 	{
 		/* If vbr and !xing, this is just an estimate. */
 		int bps = mad->bitrate / 8;
-		float secs = (float)(mad->filesize - mad->header_bytes) / bps;
-		mad->length = (int)(secs * 1000.f);
+		float secs = static_cast<float>(mad->filesize - mad->header_bytes) / bps;
+		mad->length = static_cast<int>(secs * 1000.f);
 	}
 
 	return OPEN_OK;
@@ -746,7 +746,7 @@ bool RageSoundReader_MP3::MADLIB_rewind()
 	 * to true, since the first frame is handled specially in do_mad_frame_decode; if we don't
 	 * set it, then we'll be desynced by a frame after an accurate seek. */
 //	mad->header_bytes = 0;
-	mad->first_frame = true;
+	mad->first_frame = 1;
 	mad->Stream.this_frame = NULL;
 
 	return true;
@@ -779,7 +779,7 @@ int RageSoundReader_MP3::SetPosition_toc( int iFrame, bool Xing )
 
 	/* This leaves our timer accurate if we're using our own TOC, and inaccurate
 	 * if we're using Xing. */
-	mad->timer_accurate = !Xing;
+	mad->timer_accurate = static_cast<int>(!Xing);
 
 	int bytepos = -1;
 	if( Xing )
@@ -969,23 +969,23 @@ int RageSoundReader_MP3::SetPosition( int iFrame )
 		/* Align exactly. */
 		return SetPosition_hard( iFrame );
 	}
-	else
-	{
+	
+	
 		/* Rewinding is always fast and accurate, and SetPosition_estimate is bad at 0. */
-		if( !iFrame )
+		if( iFrame == 0 )
 		{
 			MADLIB_rewind();
 			return 1; /* ok */
 		}
 
 		/* We can do a fast jump in VBR with Xing with more accuracy than without Xing. */
-		if( mad->has_xing )
+		if( mad->has_xing != 0 )
 			return SetPosition_toc( iFrame, true );
 
 		/* Guess.  This is only remotely accurate when we're not VBR, but also
 		 * do it if we have no Xing tag. */
 		return SetPosition_estimate( iFrame );
-	}
+	
 }
 
 bool RageSoundReader_MP3::SetProperty( const RString &sProperty, float fValue )
@@ -1008,7 +1008,7 @@ int RageSoundReader_MP3::GetNextSourceFrame() const
 
 int RageSoundReader_MP3::GetLengthInternal( bool fast )
 {
-	if( mad->has_xing && mad->length != -1 )
+	if( (mad->has_xing != 0) && mad->length != -1 )
 		return mad->length; /* should be accurate */
 
 	/* Check to see if a frame in the middle of the file is the same
@@ -1106,7 +1106,7 @@ int xing_parse(struct xing *xing, struct mad_bitptr ptr, unsigned int bitlen)
 	xing->flags = mad_bit_read(&ptr, 32);
 	bitlen -= 64;
 
-	if (xing->flags & XING_FRAMES)
+	if ((xing->flags & XING_FRAMES) != 0)
 	{
 		if (bitlen < 32)
 			goto fail;
@@ -1115,7 +1115,7 @@ int xing_parse(struct xing *xing, struct mad_bitptr ptr, unsigned int bitlen)
 		bitlen -= 32;
 	}
 
-	if (xing->flags & XING_BYTES)
+	if ((xing->flags & XING_BYTES) != 0)
 	{
 		if (bitlen < 32)
 			goto fail;
@@ -1124,7 +1124,7 @@ int xing_parse(struct xing *xing, struct mad_bitptr ptr, unsigned int bitlen)
 		bitlen -= 32;
 	}
 
-	if (xing->flags & XING_TOC)
+	if ((xing->flags & XING_TOC) != 0)
 	{
 		if (bitlen < 800)
 			goto fail;
@@ -1135,7 +1135,7 @@ int xing_parse(struct xing *xing, struct mad_bitptr ptr, unsigned int bitlen)
 		bitlen -= 800;
 	}
 
-	if (xing->flags & XING_SCALE)
+	if ((xing->flags & XING_SCALE) != 0)
 	{
 		if (bitlen < 32)
 			goto fail;

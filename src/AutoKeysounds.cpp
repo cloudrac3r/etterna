@@ -17,20 +17,20 @@
 
 #include "global.h"
 #include "AutoKeysounds.h"
+#include "Foreach.h"
 #include "GameState.h"
-#include "Song.h"
+#include "RageLog.h"
+#include "RageSoundManager.h"
 #include "RageSoundReader_Chain.h"
 #include "RageSoundReader_ChannelSplit.h"
 #include "RageSoundReader_Extend.h"
+#include "RageSoundReader_FileReader.h"
 #include "RageSoundReader_Merge.h"
 #include "RageSoundReader_Pan.h"
 #include "RageSoundReader_PitchChange.h"
 #include "RageSoundReader_PostBuffering.h"
 #include "RageSoundReader_ThreadedBuffer.h"
-#include "RageSoundManager.h"
-#include "RageLog.h"
-#include "RageSoundReader_FileReader.h"
-#include "Foreach.h"
+#include "Song.h"
 
 void AutoKeysounds::Load( PlayerNumber pn, const NoteData& ndAutoKeysoundsOnly )
 {
@@ -248,9 +248,9 @@ void AutoKeysounds::FinishLoading()
 		pChain->SetPreferredSampleRate( SOUNDMAN->GetDriverSampleRate() );
 		LoadAutoplaySoundsInto( pChain );
 
-		if( pChain->GetNumSounds() > 0 || !m_pSharedSound )
+		if( pChain->GetNumSounds() > 0 || (m_pSharedSound == nullptr) )
 		{
-			if( m_pSharedSound )
+			if( m_pSharedSound != nullptr )
 			{
 				int iIndex = pChain->LoadSound( m_pSharedSound );
 				pChain->AddSound( iIndex, 0.0f, 0 );

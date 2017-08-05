@@ -15,7 +15,7 @@ public:
 	InputQueue();
 
 	void RememberInput( const InputEventPlus &gi );
-	bool WasPressedRecently( GameController c, const GameButton button, const std::chrono::steady_clock::time_point &OldestTimeAllowed, InputEventPlus *pIEP = nullptr );
+	bool WasPressedRecently( GameController c, GameButton button, const std::chrono::steady_clock::time_point &OldestTimeAllowed, InputEventPlus *pIEP = nullptr );
 	const vector<InputEventPlus> &GetQueue( GameController c ) const { return m_aQueue[c]; }
 	void ClearQueue( GameController c );
 

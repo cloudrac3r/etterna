@@ -1,5 +1,4 @@
 #include "global.h"
-#include "GameState.h"
 #include "Actor.h"
 #include "AdjustSync.h"
 #include "AnnouncerManager.h"
@@ -13,6 +12,7 @@
 #include "GameConstantsAndTypes.h"
 #include "GameManager.h"
 #include "GamePreferences.h"
+#include "GameState.h"
 #include "HighScore.h"
 #include "LuaReference.h"
 #include "MessageManager.h"
@@ -25,6 +25,8 @@
 #include "RageFile.h"
 #include "RageLog.h"
 #include "RageUtil.h"
+#include "Screen.h"
+#include "ScreenManager.h"
 #include "Song.h"
 #include "SongManager.h"
 #include "SongUtil.h"
@@ -33,8 +35,6 @@
 #include "Steps.h"
 #include "Style.h"
 #include "ThemeManager.h"
-#include "ScreenManager.h"
-#include "Screen.h"
 
 #include <ctime>
 #include <set>
@@ -1713,7 +1713,7 @@ Difficulty GameState::GetClosestShownDifficulty( PlayerNumber pn ) const
 {
 	const vector<Difficulty> &v = CommonMetrics::DIFFICULTIES_TO_SHOW.GetValue();
 
-	auto iClosest = (Difficulty) 0;
+	auto iClosest = static_cast<Difficulty>( 0);
 	int iClosestDist = -1;
 	FOREACH_CONST( Difficulty, v, dc )
 	{
@@ -1827,8 +1827,8 @@ MultiPlayer GetNextEnabledMultiPlayer( MultiPlayer mp )
 }
 
 // lua start
-#include "LuaBinding.h"
 #include "Game.h"
+#include "LuaBinding.h"
 
 /** @brief Allow Lua to have access to the GameState. */
 class LunaGameState: public Luna<GameState>

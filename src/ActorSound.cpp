@@ -2,8 +2,8 @@
 #include "ActorSound.h"
 #include "ActorUtil.h"
 #include "LuaManager.h"
-#include "XmlFile.h"
 #include "RageUtil.h"
+#include "XmlFile.h"
 
 REGISTER_ACTOR_CLASS_WITH_NAME( ActorSound, Sound );
 

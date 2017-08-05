@@ -1,22 +1,22 @@
 #include "global.h"
 
 #if !defined(WITHOUT_NETWORKING)
-#include "ScreenNetSelectBase.h"
-#include "ScreenManager.h"
-#include "ThemeManager.h"
-#include "RageTimer.h"
-#include "ActorUtil.h"
 #include "Actor.h"
+#include "ActorUtil.h"
+#include "Font.h"
 #include "GameSoundManager.h"
-#include "MenuTimer.h"
-#include "NetworkSyncManager.h"
-#include "RageUtil.h"
 #include "GameState.h"
 #include "InputEventPlus.h"
-#include "RageInput.h"
-#include "Font.h"
-#include "RageDisplay.h"
+#include "MenuTimer.h"
+#include "NetworkSyncManager.h"
 #include "PlayerState.h"
+#include "RageDisplay.h"
+#include "RageInput.h"
+#include "RageTimer.h"
+#include "RageUtil.h"
+#include "ScreenManager.h"
+#include "ScreenNetSelectBase.h"
+#include "ThemeManager.h"
 
 #define CHAT_TEXT_OUTPUT_WIDTH		THEME->GetMetricF(m_sName,"ChatTextOutputWidth")
 #define CHAT_TEXT_INPUT_WIDTH		THEME->GetMetricF(m_sName,"ChatTextInputWidth")

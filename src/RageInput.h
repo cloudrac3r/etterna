@@ -3,8 +3,8 @@
 #ifndef RAGEINPUT_H
 #define RAGEINPUT_H
 
-#include "RageInputDevice.h"
 #include "Preference.h"
+#include "RageInputDevice.h"
 
 struct lua_State;
 class InputHandler;
@@ -21,7 +21,7 @@ public:
 	void GetDevicesAndDescriptions( vector<InputDeviceInfo>& vOut ) const;
 	void WindowReset();
 	void AddHandler( InputHandler *pHandler );
-	InputHandler *GetHandlerForDevice( const InputDevice id );
+	InputHandler *GetHandlerForDevice( InputDevice id );
 	RString GetDeviceSpecificInputString( const DeviceInput &di );
 	RString GetLocalizedInputString( const DeviceInput &di );
 	wchar_t DeviceInputToChar( DeviceInput di, bool bUseCurrentKeyModifiers );

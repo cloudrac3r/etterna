@@ -685,11 +685,11 @@ float RageFastSin(float angle)
 #define SET_SAMPLE(sample) \
 	if(sample##_index >= sine_table_size) \
 	{ \
-		sample= -sine_table[sample##_index - sine_table_size]; \
+		(sample)= -sine_table[sample##_index - sine_table_size]; \
 	} \
 	else \
 	{ \
-		sample= sine_table[sample##_index]; \
+		(sample)= sine_table[sample##_index]; \
 	}
 	SET_SAMPLE(first);
 	SET_SAMPLE(second);

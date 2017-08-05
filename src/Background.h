@@ -2,9 +2,9 @@
 #define BACKGROUND_H
 
 #include "ActorFrame.h"
-#include "Quad.h"
-#include "PlayerNumber.h"
 #include "BackgroundUtil.h"
+#include "PlayerNumber.h"
+#include "Quad.h"
 
 class DancingCharacters;
 class Song;

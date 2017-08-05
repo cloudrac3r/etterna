@@ -1,10 +1,10 @@
 #ifndef LIFEMETERBAR_H
 #define LIFEMETERBAR_H
 
-#include "LifeMeter.h"
-#include "Sprite.h"
 #include "AutoActor.h"
+#include "LifeMeter.h"
 #include "Quad.h"
+#include "Sprite.h"
 #include "ThemeMetric.h"
 class StreamDisplay;
 

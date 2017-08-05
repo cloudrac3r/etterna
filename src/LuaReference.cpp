@@ -175,7 +175,7 @@ namespace LuaHelpers
 		Object = apActorCommands( pRef );
 		return true;
 	}
-}
+} // namespace LuaHelpers
 
 LuaTable::LuaTable()
 {
@@ -208,7 +208,7 @@ namespace LuaHelpers
 	{
 		Object.PushSelf( L );
 	}
-}
+} // namespace LuaHelpers
 
 /*
  * (c) 2005 Glenn Maynard, Chris Danford

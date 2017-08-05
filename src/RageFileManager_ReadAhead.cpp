@@ -1,7 +1,7 @@
 #include "global.h"
 #include "RageFileManager_ReadAhead.h"
-#include "RageThreads.h"
 #include "RageLog.h"
+#include "RageThreads.h"
 
 #if defined(HAVE_FCNTL_H)
 #include <fcntl.h>

@@ -1,12 +1,10 @@
 #include "global.h"
-#include <cerrno>
-#include <cstring>
-#include "NotesWriterSSC.h"
 #include "BackgroundUtil.h"
 #include "Foreach.h"
 #include "GameManager.h"
 #include "LocalizedString.h"
 #include "NoteTypes.h"
+#include "NotesWriterSSC.h"
 #include "Profile.h"
 #include "ProfileManager.h"
 #include "RageFile.h"
@@ -15,6 +13,8 @@
 #include "RageUtil.h"
 #include "Song.h"
 #include "Steps.h"
+#include <cerrno>
+#include <cstring>
 
 /**
  * @brief Turn a vector of lines into a single line joined by newline characters.

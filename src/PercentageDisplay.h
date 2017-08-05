@@ -2,8 +2,8 @@
 #define PERCENTAGE_DISPLAY_H
 
 #include "ActorFrame.h"
-#include "PlayerNumber.h"
 #include "BitmapText.h"
+#include "PlayerNumber.h"
 #include "StageStats.h"
 #include "ThemeMetric.h"
 

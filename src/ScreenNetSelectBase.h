@@ -3,10 +3,10 @@
 #ifndef SCREEN_NET_SELECT_BASE_H
 #define SCREEN_NET_SELECT_BASE_H
 
+#include "BitmapText.h"
+#include "Quad.h"
 #include "ScreenWithMenuElements.h"
 #include "Sprite.h"
-#include "Quad.h"
-#include "BitmapText.h"
 
 // With the addition of Attributes to BitmapText, this class may very well be
 // redundant. (Leave it in for now, though.) -aj
@@ -37,7 +37,7 @@ public:
 	void Init() override;
 
 	bool Input( const InputEventPlus &input ) override;
-	void HandleScreenMessage( const ScreenMessage SM ) override;
+	void HandleScreenMessage( ScreenMessage SM ) override;
 	void TweenOffScreen() override;
 
 	void UpdateUsers();

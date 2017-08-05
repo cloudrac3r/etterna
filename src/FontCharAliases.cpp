@@ -1,8 +1,8 @@
 #include "global.h"
-#include "FontCharAliases.h"
 #include "Font.h"
-#include "RageUtil.h"
+#include "FontCharAliases.h"
 #include "RageLog.h"
+#include "RageUtil.h"
 
 #include <map>
 
@@ -351,7 +351,7 @@ static void InitCharAliases()
 	};
 
 	int iNextInternalUseCodepoint = 0xE000;
-	for( unsigned n = 0; aliases[n].str; ++n )
+	for( unsigned n = 0; aliases[n].str != nullptr; ++n )
 	{
 		int iCodepoint = aliases[n].chr;
 		if( iCodepoint == INTERNAL )

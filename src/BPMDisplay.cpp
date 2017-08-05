@@ -1,14 +1,14 @@
 #include "global.h"
+#include "ActorUtil.h"
 #include "BPMDisplay.h"
-#include "RageUtil.h"
+#include "CommonMetrics.h"
 #include "GameConstantsAndTypes.h"
 #include "GameState.h"
-#include "Style.h"
-#include "ActorUtil.h"
-#include "CommonMetrics.h"
 #include "LocalizedString.h"
+#include "RageUtil.h"
 #include "Song.h"
 #include "Steps.h"
+#include "Style.h"
 
 #include <climits>
 

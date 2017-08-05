@@ -4,8 +4,8 @@
 #define FONT_H
 
 #include "RageTextureID.h"
-#include "RageUtil.h"
 #include "RageTypes.h"
+#include "RageUtil.h"
 #include <map>
 
 class FontPage;

@@ -1,11 +1,11 @@
 #include "global.h"
-#include "ReceptorArrow.h"
 #include "GameState.h"
 #include "NoteSkinManager.h"
+#include "PlayerState.h"
 #include "RageLog.h"
 #include "RageUtil.h"
+#include "ReceptorArrow.h"
 #include "Style.h"
-#include "PlayerState.h"
 
 ReceptorArrow::ReceptorArrow()
 {

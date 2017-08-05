@@ -1,15 +1,15 @@
 #include "global.h"
 #include "ActorFrame.h"
-#include "arch/Dialog/Dialog.h"
-#include "RageUtil.h"
-#include "RageLog.h"
-#include "XmlFile.h"
 #include "ActorUtil.h"
-#include "LuaBinding.h"
 #include "ActorUtil.h"
-#include "RageDisplay.h"
-#include "ScreenDimensions.h"
 #include "Foreach.h"
+#include "LuaBinding.h"
+#include "RageDisplay.h"
+#include "RageLog.h"
+#include "RageUtil.h"
+#include "ScreenDimensions.h"
+#include "XmlFile.h"
+#include "arch/Dialog/Dialog.h"
 
 /* Tricky: We need ActorFrames created in Lua to auto delete their children.
  * We don't want classes that derive from ActorFrame to auto delete their 
@@ -321,7 +321,7 @@ static int IdenticalChildrenSingleApplier(lua_State* L)
 // This is the __index function for the table of all children with the same name.
 static int IdenticalChildrenIndexLayer(lua_State* L)
 {
-	if(lua_isnumber(L, 2))
+	if(lua_isnumber(L, 2) != 0)
 	{
 		lua_rawget(L, 1);
 	}
@@ -428,7 +428,7 @@ void ActorFrame::PushChildTable(lua_State* L, const RString &sName)
 			++found;
 		}
 	}
-	if(!found)
+	if(found == 0)
 	{
 		lua_pushnil(L);
 	}
@@ -733,7 +733,7 @@ public:
 	static int RemoveChild( T* p, lua_State *L )
 	{
 		Actor *child = p->GetChild(SArg(1));
-		if(child)
+		if(child != nullptr)
 		{
 			p->RemoveChild(child);
 			SAFE_DELETE(child);

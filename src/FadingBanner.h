@@ -3,8 +3,8 @@
 #ifndef FADING_BANNER_H
 #define FADING_BANNER_H
 
-#include "Banner.h"
 #include "ActorFrame.h"
+#include "Banner.h"
 #include "RageTimer.h"
 
 class FadingBanner : public ActorFrame

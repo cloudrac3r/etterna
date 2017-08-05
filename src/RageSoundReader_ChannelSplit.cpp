@@ -33,12 +33,12 @@
  */
 
 #include "global.h"
-#include "RageSoundReader_ChannelSplit.h"
-#include "RageLog.h"
-#include "RageUtil.h"
-#include "RageSoundMixBuffer.h"
-#include "RageSoundUtil.h"
 #include "Foreach.h"
+#include "RageLog.h"
+#include "RageSoundMixBuffer.h"
+#include "RageSoundReader_ChannelSplit.h"
+#include "RageSoundUtil.h"
+#include "RageUtil.h"
 
 #include <climits>
 #include <set>
@@ -50,7 +50,7 @@ class RageSoundReader_Split;
 class RageSoundSplitterImpl
 {
 public:
-	RageSoundSplitterImpl( RageSoundReader *pSource )
+	explicit RageSoundSplitterImpl( RageSoundReader *pSource )
 	{
 		m_iRefCount = 1;
 		m_pSource = pSource;

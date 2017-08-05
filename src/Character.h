@@ -2,8 +2,8 @@
 #define Character_H
 
 #include "GameConstantsAndTypes.h"
-#include "RageTexturePreloader.h"
 #include "LuaReference.h"
+#include "RageTexturePreloader.h"
 struct lua_State;
 using Lua = lua_State;
 

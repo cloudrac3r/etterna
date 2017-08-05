@@ -4,10 +4,10 @@
 #define MENU_TIMER_H
 
 #include "ActorFrame.h"
+#include "AutoActor.h"
 #include "BitmapText.h"
 #include "RageSound.h"
 #include "ThemeMetric.h"
-#include "AutoActor.h"
 
 RString WARNING_COMMAND_NAME( size_t i );
 

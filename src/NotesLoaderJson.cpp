@@ -1,14 +1,14 @@
 #include "global.h"
-#include "NotesLoaderJson.h"
-#include "json/value.h"
-#include "TimingData.h"
-#include "RageUtil.h"
-#include "JsonUtil.h"
 #include "BackgroundUtil.h"
+#include "GameManager.h"
+#include "JsonUtil.h"
 #include "NoteData.h"
+#include "NotesLoaderJson.h"
+#include "RageUtil.h"
 #include "Song.h"
 #include "Steps.h"
-#include "GameManager.h"
+#include "TimingData.h"
+#include "json/value.h"
 
 void NotesLoaderJson::GetApplicableFiles( const RString &sPath, vector<RString> &out )
 {

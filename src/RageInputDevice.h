@@ -2,8 +2,8 @@
 #ifndef RAGE_INPUT_DEVICE_H
 #define RAGE_INPUT_DEVICE_H
 
-#include "RageTimer.h"
 #include "EnumHelper.h"
+#include "RageTimer.h"
 #include <chrono>
 
 const int NUM_JOYSTICKS = 32;

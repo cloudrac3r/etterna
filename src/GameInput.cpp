@@ -1,8 +1,8 @@
 #include "global.h"
 #include "GameInput.h"
+#include "InputMapper.h"
 #include "RageLog.h"
 #include "RageUtil.h"
-#include "InputMapper.h"
 #include "ThemeManager.h"
 
 

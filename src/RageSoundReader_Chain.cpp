@@ -1,14 +1,14 @@
 #include "global.h"
+#include "Foreach.h"
+#include "RageLog.h"
+#include "RageSoundMixBuffer.h"
 #include "RageSoundReader_Chain.h"
 #include "RageSoundReader_FileReader.h"
-#include "RageSoundReader_Resample_Good.h"
-#include "RageSoundReader_Preload.h"
 #include "RageSoundReader_Pan.h"
-#include "RageLog.h"
-#include "RageUtil.h"
-#include "RageSoundMixBuffer.h"
+#include "RageSoundReader_Preload.h"
+#include "RageSoundReader_Resample_Good.h"
 #include "RageSoundUtil.h"
-#include "Foreach.h"
+#include "RageUtil.h"
 
 /*
  * Keyed sounds should pass this object to SoundReader_Preload, to preprocess it.

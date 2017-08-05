@@ -2,11 +2,11 @@
 #define PlayerStageStats_H
 
 #include "Grade.h"
-#include "RadarValues.h"
 #include "HighScore.h"
-#include "PlayerNumber.h"
-#include <map>
 #include "NoteDataStructures.h"
+#include "PlayerNumber.h"
+#include "RadarValues.h"
+#include <map>
 class Steps;
 class Style;
 struct lua_State;

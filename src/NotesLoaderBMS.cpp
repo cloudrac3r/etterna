@@ -1,22 +1,22 @@
 #include "global.h"
-#include "NotesLoaderBMS.h"
-#include "NoteData.h"
+#include "ActorUtil.h"
+#include "BackgroundUtil.h"
 #include "GameConstantsAndTypes.h"
-#include "RageLog.h"
 #include "GameManager.h"
-#include "SongManager.h"
-#include "RageFile.h"
-#include "SongUtil.h"
-#include "StepsUtil.h"
-#include "Song.h"
-#include "Steps.h"
-#include "RageUtil_CharConversions.h"
+#include "NoteData.h"
 #include "NoteTypes.h"
 #include "NotesLoader.h"
+#include "NotesLoaderBMS.h"
 #include "PrefsManager.h"
-#include "BackgroundUtil.h"
-#include "ActorUtil.h"
+#include "RageFile.h"
 #include "RageFileManager.h"
+#include "RageLog.h"
+#include "RageUtil_CharConversions.h"
+#include "Song.h"
+#include "SongManager.h"
+#include "SongUtil.h"
+#include "Steps.h"
+#include "StepsUtil.h"
 
 /* BMS encoding:	tap-hold
  * 4&8panel:	Player1		Player2
@@ -443,7 +443,7 @@ struct bmsCommandTree
 					currentNode = createElseNode(currentNode->parent);
 					return;
 				}
-				else
+				
 					LOG->UserLog("Song file", path, "Line %d: #else without matching #if chain.\n", line);
 			} else
 				LOG->UserLog("Song file", path, "Line %d: #else used at root level.\n", line);
@@ -598,7 +598,7 @@ class BMSSong {
 	map<RString, RString> mapBackground;
 
 public:
-	BMSSong( Song *song );
+	explicit BMSSong( Song *song );
 	int AllocateKeysound( RString filename, RString path );
 	bool GetBackground( RString filename, RString path, RString &bgfile );
 	Song *GetSong();
@@ -1060,10 +1060,10 @@ int BMSChartReader::GetKeysound( const BMSObject &obj )
 		mapValueToKeysoundIndex[obj.value] = index;
 		return index;
 	}
-	else
-	{
+	
+	
 		return it->second;
-	}
+	
 }
 
 struct BMSAutoKeysound {

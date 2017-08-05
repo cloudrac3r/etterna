@@ -1,12 +1,12 @@
 #include "global.h"
 
 #if !defined(WITHOUT_NETWORKING)
-#include "ScreenNetEvaluation.h"
-#include "ThemeManager.h"
 #include "GameState.h"
 #include "RageLog.h"
-#include "Style.h"
+#include "ScreenNetEvaluation.h"
 #include "SongUtil.h"
+#include "Style.h"
+#include "ThemeManager.h"
 
 static const int NUM_SCORE_DIGITS = 9;
 
@@ -163,7 +163,7 @@ void ScreenNetEvaluation::HandleScreenMessage( const ScreenMessage SM )
 		}
 		return; // No need to let ScreenEvaluation get a hold of this.
 	}
-	else if( SM == SM_GoToNextScreen )
+	if( SM == SM_GoToNextScreen )
 	{
 		NSMAN->ReportNSSOnOff( 4 );
 	}

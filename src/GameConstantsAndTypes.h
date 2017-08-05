@@ -176,7 +176,7 @@ enum SortOrder
 	SortOrder_Invalid
 };
 /** @brief Only allow certain sort modes to be selectable. */
-const SortOrder MAX_SELECTABLE_SORT = (SortOrder)(SORT_RECENT-1);
+const SortOrder MAX_SELECTABLE_SORT = static_cast<SortOrder>(SORT_RECENT-1);
 /**
  * @brief Turn the sort order into a proper string.
  * @param so the sort order.

@@ -3,8 +3,8 @@
 #include "RageSurfaceUtils.h"
 #include "RageSurface_Save_JPEG.h"
 
-#include "RageUtil.h"
 #include "RageFile.h"
+#include "RageUtil.h"
 
 #undef FAR // fix for VC
 /** @brief A helper to get the jpeg lib. */
@@ -14,7 +14,7 @@ namespace jpeg
 	{
 #include "jpeglib.h"
 	}
-}
+} // namespace jpeg
 
 #define OUTPUT_BUFFER_SIZE	4096
 typedef struct

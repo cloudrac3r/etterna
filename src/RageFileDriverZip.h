@@ -8,7 +8,7 @@ class RageFileDriverZip: public RageFileDriver
 {
 public:
 	RageFileDriverZip();
-	RageFileDriverZip( const RString &sPath );
+	explicit RageFileDriverZip( const RString &sPath );
 	bool Load( const RString &sPath );
 	bool Load( RageFileBasic *pFile );
 

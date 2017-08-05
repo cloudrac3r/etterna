@@ -3,8 +3,8 @@
 
 #include "ActorFrame.h"
 #include "AutoActor.h"
-#include "PlayerNumber.h"
 #include "GameConstantsAndTypes.h"
+#include "PlayerNumber.h"
 
 class PlayerState;
 /** @brief A gray arrow that "receives" the note arrows. */

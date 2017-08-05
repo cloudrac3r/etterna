@@ -2,9 +2,9 @@
 #define GRADE_DISPLAY_H
 
 #include "ActorFrame.h"
+#include "AutoActor.h"
 #include "Grade.h"
 #include "PlayerNumber.h"
-#include "AutoActor.h"
 struct lua_State;
 /** @brief Grade shown on ScreenEvaluation. */
 class GradeDisplay : public ActorFrame

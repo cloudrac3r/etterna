@@ -1,18 +1,18 @@
 #include "global.h"
 #include "Actor.h"
 #include "ActorFrame.h"
-#include "RageDisplay.h"
-#include "RageUtil.h"
-#include "RageMath.h"
-#include "RageLog.h"
+#include "ActorUtil.h"
 #include "Foreach.h"
-#include "XmlFile.h"
 #include "LuaBinding.h"
-#include "ThemeManager.h"
 #include "LuaReference.h"
 #include "MessageManager.h"
-#include "ActorUtil.h"
 #include "Preference.h"
+#include "RageDisplay.h"
+#include "RageLog.h"
+#include "RageMath.h"
+#include "RageUtil.h"
+#include "ThemeManager.h"
+#include "XmlFile.h"
 #include <typeinfo>
 
 static Preference<bool> g_bShowMasks("ShowMasks", false);
@@ -133,10 +133,10 @@ static bool GetMessageNameFromCommandName( const RString &sCommandName, RString 
 		sMessageNameOut = sCommandName.Left(sCommandName.size()-7);
 		return true;
 	}
-	else
-	{
+	
+	
 		return false;
-	}
+	
 }
 
 Actor::Actor()
@@ -301,7 +301,7 @@ void Actor::Draw()
 		return; // early abort
 	}
 
-	if(m_FakeParent)
+	if(m_FakeParent != nullptr)
 	{
 		if(!m_FakeParent->m_bVisible || m_FakeParent->m_fHibernateSecondsLeft > 0
 			|| m_FakeParent->EarlyAbortDraw())
@@ -316,7 +316,7 @@ void Actor::Draw()
 		}
 	}
 
-	if(m_FakeParent)
+	if(m_FakeParent != nullptr)
 	{
 		m_FakeParent->BeginDraw();
 	}
@@ -397,7 +397,7 @@ void Actor::Draw()
 		state->m_pTempState= nullptr;
 	}
 
-	if(m_FakeParent)
+	if(m_FakeParent != nullptr)
 	{
 		m_FakeParent->EndDraw();
 		m_FakeParent->PostDraw();
@@ -1347,7 +1347,7 @@ void Actor::TweenState::Init()
 
 bool Actor::TweenState::operator==( const TweenState &other ) const
 {
-#define COMPARE( x )	if( x != other.x ) return false;
+#define COMPARE( x )	if( (x) != other.x ) return false;
 	COMPARE( pos );
 	COMPARE( rotation );
 	COMPARE( quat );
@@ -1505,7 +1505,7 @@ Actor::TweenInfo::TweenInfo( const TweenInfo &cpy )
 Actor::TweenInfo &Actor::TweenInfo::operator=( const TweenInfo &rhs )
 {
 	delete m_pTween;
-	m_pTween = (rhs.m_pTween? rhs.m_pTween->Copy():nullptr);
+	m_pTween = (rhs.m_pTween != nullptr? rhs.m_pTween->Copy():nullptr);
 	m_fTimeLeftInTween = rhs.m_fTimeLeftInTween;
 	m_fTweenTime = rhs.m_fTweenTime;
 	m_sCommandName = rhs.m_sCommandName;
@@ -1706,7 +1706,7 @@ public:
 		float haz= FArg(4);
 		// Compatibility:  hold_at_full is optional.
 		float haf= 0;
-		if(lua_isnumber(L, 5))
+		if(lua_isnumber(L, 5) != 0)
 		{
 			haf= FArg(5);
 		}

@@ -1,9 +1,9 @@
 #include "global.h"
-#include "RageSurface_Save_BMP.h"
+#include "RageFile.h"
 #include "RageSurface.h"
 #include "RageSurfaceUtils.h"
+#include "RageSurface_Save_BMP.h"
 #include "RageUtil.h"
-#include "RageFile.h"
 
 static void WriteBytes( RageFile &f, RString &sError, const void *buf, int size )
 {

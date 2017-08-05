@@ -1,9 +1,9 @@
 #include "global.h"
+#include "RageFile.h"
+#include "RageLog.h"
+#include "RageSurface.h"
 #include "RageSurface_Load_PNG.h"
 #include "RageUtil.h"
-#include "RageLog.h"
-#include "RageFile.h"
-#include "RageSurface.h"
 
 #if defined(_MSC_VER)
 #include "../extern/libpng/png.h"
@@ -20,7 +20,7 @@ namespace
 void RageFile_png_read( png_struct *png, png_byte *p, png_size_t size )
 {
 	CHECKPOINT_M("Reading the png file.");
-	RageFile *f = (RageFile *) png_get_io_ptr(png);
+	RageFile *f = reinterpret_cast<RageFile *>( png_get_io_ptr(png));
 
 	int got = f->Read( p, size );
 	if( got == -1 )
@@ -33,7 +33,7 @@ void RageFile_png_read( png_struct *png, png_byte *p, png_size_t size )
 		error[sizeof(error)-1] = 0;
 		png_error( png, error );
 	}
-	else if( got != (int) size )
+	else if( got != static_cast<int>( size) )
 		png_error( png, "Unexpected EOF" );
 }
 
@@ -46,7 +46,7 @@ struct error_info
 void PNG_Error( png_struct *png, const char *error )
 {
 	CHECKPOINT_M(ssprintf("PNG error during processing: %s", error));
-	error_info *info = (error_info *)png_get_error_ptr(png);
+	error_info *info = reinterpret_cast<error_info *>(png_get_error_ptr(png));
 	LOG->Trace( "PNG_Error on (%s): %s", info->file_name, error );
 	longjmp( png_jmpbuf(png), 1 );
 }
@@ -55,7 +55,7 @@ void PNG_Warning( png_struct *png, const char *warning )
 {
 	// FIXME: Mismatched libpng headers vs. library causes a segfault here on MinGW
 	CHECKPOINT_M(ssprintf("PNG warning during processing: %s", warning));
-	error_info *info = (error_info *)png_get_error_ptr(png);
+	error_info *info = reinterpret_cast<error_info *>(png_get_error_ptr(png));
 	LOG->Trace( "PNG_Warn on (%s): %s", info->file_name, warning );
 }
 
@@ -95,10 +95,10 @@ static RageSurface *RageSurface_Load_PNG( RageFile *f, const char *fn, char erro
 	{
 		png_destroy_read_struct(&png, &info_ptr, NULL);
 		delete img;
-		if(row_pointers != NULL)
-		{
+		
+		
 			delete[] row_pointers;
-		}
+		
 		return NULL;
 	}
 
@@ -197,7 +197,7 @@ static RageSurface *RageSurface_Load_PNG( RageFile *f, const char *fn, char erro
 	else
 	{
 		/* If we have RGB image and tRNS, it's a color key.  Just convert it to RGBA. */
-		if( png_get_valid(png, info_ptr, PNG_INFO_tRNS) )
+		if( png_get_valid(png, info_ptr, PNG_INFO_tRNS) != 0u )
 		{
 			/* We don't care about RGB color keys; just convert them to alpha. */
 			png_set_tRNS_to_alpha( png );

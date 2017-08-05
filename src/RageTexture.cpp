@@ -1,8 +1,8 @@
 #include "global.h"
 
 #include "RageTexture.h"
-#include "RageUtil.h"
 #include "RageTextureManager.h"
+#include "RageUtil.h"
 #include <cstring>
 
 

@@ -1,22 +1,22 @@
 #include "global.h"
-#include "RageUtil.h"
-#include "RageMath.h"
-#include "RageLog.h"
-#include "RageFile.h"
-#include "RageSoundReader_FileReader.h"
 #include "Foreach.h"
 #include "LocalizedString.h"
 #include "LuaBinding.h"
 #include "LuaManager.h"
+#include "RageFile.h"
+#include "RageLog.h"
+#include "RageMath.h"
+#include "RageSoundReader_FileReader.h"
+#include "RageUtil.h"
 #include <cfloat>
 
-#include <numeric>
-#include <ctime>
-#include <sstream>
-#include <map>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <cmath>
+#include <ctime>
+#include <map>
+#include <numeric>
+#include <sstream>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 bool HexToBinary(const RString&, RString&);
 void utf8_sanitize(RString &);
@@ -84,7 +84,7 @@ namespace
 		LIST_METHOD( Random ),
 		{ NULL, NULL }
 	};
-}
+} // namespace
 
 LUA_REGISTER_NAMESPACE( MersenneTwister );
 
@@ -118,16 +118,16 @@ float fmodfp(float x, float y)
 int power_of_two( int input )
 {
 	int exp = 31, i = input;
-	if (i >> 16)
+	if ((i >> 16) != 0)
 		i >>= 16;
 	else exp -= 16;
-	if (i >> 8)
+	if ((i >> 8) != 0)
 		i >>= 8;
 	else exp -= 8;
-	if (i >> 4)
+	if ((i >> 4) != 0)
 		i >>= 4;
 	else exp -= 4;
-	if (i >> 2)
+	if ((i >> 2) != 0)
 		i >>= 2;
 	else exp -= 2;
 	if (i >> 1 == 0)
@@ -163,7 +163,7 @@ bool IsHexVal( const RString &s )
 
 RString BinaryToHex( const void *pData_, int iNumBytes )
 {
-	const auto *pData = (const unsigned char *) pData_;
+	const auto *pData = reinterpret_cast<const unsigned char *>( pData_);
 	RString s;
 	for( int i=0; i<iNumBytes; i++ )
 	{
@@ -221,51 +221,51 @@ float HHMMSSToSeconds( const RString &sHHMMSS )
 
 RString SecondsToHHMMSS( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
 	RString sReturn = ssprintf( "%02d:%02d:%02d", iMinsDisplay/60, iMinsDisplay%60, iSecsDisplay );
 	return sReturn;
 }
 
 RString SecondsToMMSSMsMs( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
-	const auto iLeftoverDisplay = (int) ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 100 );
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
+	const auto iLeftoverDisplay = static_cast<int> ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 100 );
 	RString sReturn = ssprintf( "%02d:%02d.%02d", iMinsDisplay, iSecsDisplay, min(99,iLeftoverDisplay) );
 	return sReturn;
 }
 
 RString SecondsToMSSMsMs( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
-	const auto iLeftoverDisplay = (int) ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 100 );
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
+	const auto iLeftoverDisplay = static_cast<int> ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 100 );
 	RString sReturn = ssprintf( "%01d:%02d.%02d", iMinsDisplay, iSecsDisplay, min(99,iLeftoverDisplay) );
 	return sReturn;
 }
 
 RString SecondsToMMSSMsMsMs( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
-	const auto iLeftoverDisplay = (int) ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 1000 );
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
+	const auto iLeftoverDisplay = static_cast<int> ( (fSecs - iMinsDisplay*60 - iSecsDisplay) * 1000 );
 	RString sReturn = ssprintf( "%02d:%02d.%03d", iMinsDisplay, iSecsDisplay, min(999,iLeftoverDisplay) );
 	return sReturn;
 }
 
 RString SecondsToMSS( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
 	RString sReturn = ssprintf( "%01d:%02d", iMinsDisplay, iSecsDisplay);
 	return sReturn;
 }
 
 RString SecondsToMMSS( float fSecs )
 {
-	const int iMinsDisplay = (int)fSecs/60;
-	const int iSecsDisplay = (int)fSecs - iMinsDisplay*60;
+	const int iMinsDisplay = static_cast<int>(fSecs)/60;
+	const int iSecsDisplay = static_cast<int>(fSecs) - iMinsDisplay*60;
 	RString sReturn = ssprintf( "%02d:%02d", iMinsDisplay, iSecsDisplay);
 	return sReturn;
 }
@@ -296,7 +296,7 @@ RString Commify(const RString& num, const RString& sep, const RString& dot)
 		num_start= dash_pos + 1;
 	}
 	size_t num_size= num_end - num_start;
-	size_t commies= (num_size / 3) - (!(num_size % 3));
+	size_t commies= (num_size / 3) - static_cast<unsigned long long>((num_size % 3) == 0u);
 	if(commies < 1)
 	{
 		return num;
@@ -305,7 +305,7 @@ RString Commify(const RString& num, const RString& sep, const RString& dot)
 	RString ret;
 	ret.resize(commified_len);
 	size_t dest= 0;
-	size_t next_comma= (num_size % 3) + (3 * (!(num_size % 3))) + num_start;
+	size_t next_comma= (num_size % 3) + (3 * static_cast<int>((num_size % 3) == 0u)) + num_start;
 	for(size_t c= 0; c < num.size(); ++c)
 	{
 		if(c == next_comma && c < num_end)
@@ -1103,13 +1103,13 @@ bool GetCommandlineArgument( const RString &option, RString *argument, int iInde
 			continue; // no match
 
 		// Found it.
-		if( iIndex )
+		if( iIndex != 0 )
 		{
 			--iIndex;
 			continue;
 		}
 
-		if( argument )
+		if( argument != nullptr )
 		{
 			if( i != RString::npos )
 				*argument = CurArgument.substr( i+1 );
@@ -1151,7 +1151,7 @@ void CRC32( unsigned int &iCRC, const void *pVoidBuffer, size_t iSize )
 			tab[i] = i;
 			for( int j = 0; j < 8; ++j )
 			{
-				if( tab[i] & 1 )
+				if( (tab[i] & 1) != 0u )
 					tab[i] = (tab[i] >> 1) ^ POLY;
 				else
 					tab[i] >>= 1;
@@ -1161,7 +1161,7 @@ void CRC32( unsigned int &iCRC, const void *pVoidBuffer, size_t iSize )
 
 	iCRC ^= 0xFFFFFFFF;
 
-	const auto *pBuffer = (const char *) pVoidBuffer;
+	const auto *pBuffer = reinterpret_cast<const char *>( pVoidBuffer);
 	for( unsigned i = 0; i < iSize; ++i )
 		iCRC = (iCRC >> 8) ^ tab[(iCRC ^ pBuffer[i]) & 0xFF];
 
@@ -2330,7 +2330,7 @@ namespace StringConversion
 	{
 		return ssprintf( "%i", value );
 	}
-}
+} // namespace StringConversion
 
 bool FileCopy( const RString &sSrcFile, const RString &sDstFile )
 {
@@ -2440,7 +2440,7 @@ int LuaFunc_commify(lua_State* L)
 }
 LUAFUNC_REGISTER_COMMON(commify);
 
-void luafunc_approach_internal(lua_State* L, int valind, int goalind, int speedind, const float mult);
+void luafunc_approach_internal(lua_State* L, int valind, int goalind, int speedind, float mult);
 void luafunc_approach_internal(lua_State* L, int valind, int goalind, int speedind, const float mult, int process_index)
 {
 #define TONUMBER_NICE(dest, num_name, index) \
@@ -2448,7 +2448,7 @@ void luafunc_approach_internal(lua_State* L, int valind, int goalind, int speedi
 	{ \
 		luaL_error(L, "approach: " #num_name " for approach %d is not a number.", process_index); \
 	} \
-	dest= lua_tonumber(L, index);
+	(dest)= lua_tonumber(L, index);
 	float val= 0;
 	float goal= 0;
 	float speed= 0;
@@ -2491,7 +2491,7 @@ int LuaFunc_multiapproach(lua_State* L)
 	size_t goals_len= lua_objlen(L, 2);
 	size_t speeds_len= lua_objlen(L, 3);
 	float mult= 1.0f;
-	if(lua_isnumber(L, 4))
+	if(lua_isnumber(L, 4) != 0)
 	{
 		mult= lua_tonumber(L, 4);
 	}

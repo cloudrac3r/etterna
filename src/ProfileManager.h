@@ -1,11 +1,11 @@
 #ifndef ProfileManager_H
 #define ProfileManager_H
 
-#include "PlayerNumber.h"
-#include "GameConstantsAndTypes.h"
 #include "Difficulty.h"
-#include "Preference.h"
+#include "GameConstantsAndTypes.h"
 #include "Grade.h"
+#include "PlayerNumber.h"
+#include "Preference.h"
 #include "Profile.h"
 #include "arch/LoadingWindow/LoadingWindow.h"
 

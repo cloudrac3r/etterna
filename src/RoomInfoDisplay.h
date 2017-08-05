@@ -3,8 +3,8 @@
 #ifndef ROOM_INFO_DISPLAY_H
 #define ROOM_INFO_DISPLAY_H
 
-#include "RoomWheel.h"
 #include "ActorFrame.h"
+#include "RoomWheel.h"
 
 class RoomInfoDisplay : public ActorFrame
 {

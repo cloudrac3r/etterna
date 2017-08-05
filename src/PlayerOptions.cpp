@@ -1,14 +1,14 @@
 #include "global.h"
-#include "PlayerOptions.h"
-#include "RageUtil.h"
+#include "CommonMetrics.h"
+#include "Foreach.h"
 #include "GameState.h"
 #include "NoteSkinManager.h"
+#include "PlayerOptions.h"
+#include "RageUtil.h"
 #include "Song.h"
 #include "Steps.h"
-#include "ThemeManager.h"
-#include "Foreach.h"
 #include "Style.h"
-#include "CommonMetrics.h"
+#include "ThemeManager.h"
 #include <cfloat>
 
 static const char *LifeTypeNames[] = {
@@ -767,7 +767,7 @@ float PlayerOptions::GetReversePercentForColumn( int iCol ) const
 
 bool PlayerOptions::operator==( const PlayerOptions &other ) const
 {
-#define COMPARE(x) { if( x != other.x ) return false; }
+#define COMPARE(x) { if( (x) != other.x ) return false; }
 	COMPARE(m_LifeType);
 	COMPARE(m_DrainType);
 	COMPARE(m_BatteryLives);
@@ -1149,13 +1149,13 @@ public:
 		{
 			lua_pushstring( L, p->m_sNoteSkin );
 		}
-		if(original_top >= 1 && lua_isstring(L, 1))
+		if(original_top >= 1 && (lua_isstring(L, 1) != 0))
 		{
 			RString skin= SArg(1);
 			if(NOTESKIN->DoesNoteSkinExist(skin))
 			{
 				p->m_sNoteSkin = skin;
-				lua_pushboolean(L, true);
+				lua_pushboolean(L, 1);
 			}
 			else
 			{
@@ -1194,7 +1194,7 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(original_top >= 1 && lua_isnumber(L, 1))
+		if(original_top >= 1 && (lua_isnumber(L, 1) != 0))
 		{
 			float speed= FArg(1);
 			if(!isfinite(speed) || speed <= 0.0f)
@@ -1206,7 +1206,7 @@ public:
 			p->m_fScrollSpeed = 1;
 			p->m_fMaxScrollBPM = 0;
 		}
-		if(original_top >= 2 && lua_isnumber(L, 2))
+		if(original_top >= 2 && (lua_isnumber(L, 2) != 0))
 		{
 			SetSpeedModApproaches(p, FArgGTEZero(L, 2));
 		}
@@ -1227,14 +1227,14 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			p->m_fScrollSpeed = FArg(1);
 			p->m_fTimeSpacing = 0;
 			p->m_fScrollBPM= CMOD_DEFAULT;
 			p->m_fMaxScrollBPM = 0;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetSpeedModApproaches(p, FArgGTEZero(L, 2));
 		}
@@ -1255,7 +1255,7 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			float speed= FArg(1);
 			if(!isfinite(speed) || speed <= 0.0f)
@@ -1267,7 +1267,7 @@ public:
 			p->m_fScrollSpeed= 1;
 			p->m_fMaxScrollBPM = speed;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetSpeedModApproaches(p, FArgGTEZero(L, 2));
 		}
@@ -1285,12 +1285,12 @@ public:
 	{
 		int original_top= lua_gettop(L);
 		lua_pushboolean(L, (p->m_fPerspectiveTilt == 0.0f && p->m_fSkew == 0.0f));
-		if(lua_toboolean(L, 1))
+		if(lua_toboolean(L, 1) != 0)
 		{
 			p->m_fPerspectiveTilt= 0;
 			p->m_fSkew= 0;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetPerspectiveApproach(p, L, FArgGTEZero(L, 2));
 		}
@@ -1312,13 +1312,13 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			float value= FArg(1);
 			p->m_fPerspectiveTilt= -value;
 			p->m_fSkew= value;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetPerspectiveApproach(p, L, FArgGTEZero(L, 2));
 		}
@@ -1340,13 +1340,13 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			float value= FArg(1);
 			p->m_fPerspectiveTilt= value;
 			p->m_fSkew= value;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetPerspectiveApproach(p, L, FArgGTEZero(L, 2));
 		}
@@ -1367,12 +1367,12 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			p->m_fPerspectiveTilt= -FArg(1);
 			p->m_fSkew= 0;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetPerspectiveApproach(p, L, FArgGTEZero(L, 2));
 		}
@@ -1393,12 +1393,12 @@ public:
 			lua_pushnil(L);
 			lua_pushnil(L);
 		}
-		if(lua_isnumber(L, 1) && original_top >= 1)
+		if((lua_isnumber(L, 1) != 0) && original_top >= 1)
 		{
 			p->m_fPerspectiveTilt= FArg(1);
 			p->m_fSkew= 0;
 		}
-		if(lua_isnumber(L, 2) && original_top >= 2)
+		if((lua_isnumber(L, 2) != 0) && original_top >= 2)
 		{
 			SetPerspectiveApproach(p, L, FArgGTEZero(L, 2));
 		}

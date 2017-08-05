@@ -1,8 +1,8 @@
 #ifndef GameplayAssist_H
 #define GameplayAssist_H
 
-#include "RageSound.h"
 #include "PlayerState.h"
+#include "RageSound.h"
 
 class NoteData;
 /** @brief The handclaps and metronomes ready to assist the player. */

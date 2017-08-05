@@ -9,11 +9,11 @@
  */
 
 #include "global.h"
-#include "RageSoundReader_PitchChange.h"
-#include "RageSoundReader_SpeedChange.h"
-#include "RageSoundReader_Resample_Good.h"
-#include "RageLog.h"
 #include "Preference.h"
+#include "RageLog.h"
+#include "RageSoundReader_PitchChange.h"
+#include "RageSoundReader_Resample_Good.h"
+#include "RageSoundReader_SpeedChange.h"
 
 Preference<bool>  EnablePitchRates("EnablePitchRates", true);
 RageSoundReader_PitchChange::RageSoundReader_PitchChange( RageSoundReader *pSource ):

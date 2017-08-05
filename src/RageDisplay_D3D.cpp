@@ -1,18 +1,18 @@
 #include "global.h"
+#include "DisplayResolutions.h"
+#include "EnumHelper.h"
 #include "Foreach.h"
+#include "LocalizedString.h"
 #include "RageDisplay.h"
 #include "RageDisplay_D3D.h"
-#include "RageUtil.h"
-#include "RageLog.h"
-#include "RageTimer.h"
 #include "RageException.h"
+#include "RageLog.h"
 #include "RageMath.h"
-#include "RageTypes.h"
 #include "RageSurface.h"
 #include "RageSurfaceUtils.h"
-#include "EnumHelper.h"
-#include "DisplayResolutions.h"
-#include "LocalizedString.h"
+#include "RageTimer.h"
+#include "RageTypes.h"
+#include "RageUtil.h"
 #include <chrono>
 
 #include <D3dx9tex.h>
@@ -1677,7 +1677,7 @@ void RageDisplay_D3D::SetRenderTarget(unsigned uTexHandle, bool bPreserveTexture
 		viewData.Height = GetActualVideoModeParams()->height;
 		g_pd3dDevice->SetViewport(&viewData);
 
-		if (g_pCurrentRenderTarget)
+		if (g_pCurrentRenderTarget != nullptr)
 			g_pCurrentRenderTarget->FinishRenderingTo();
 		g_pCurrentRenderTarget = NULL;
 		g_pd3dDevice->SetRenderState(D3DRS_SEPARATEALPHABLENDENABLE, false);

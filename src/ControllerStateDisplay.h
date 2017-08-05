@@ -5,10 +5,10 @@
 
 #include "ActorFrame.h"
 #include "ActorUtil.h"
-#include "PlayerNumber.h"
 #include "AutoActor.h"
-#include "RageInput.h"
 #include "GameInput.h"
+#include "PlayerNumber.h"
+#include "RageInput.h"
 
 enum ControllerStateButton
 {

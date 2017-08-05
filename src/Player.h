@@ -3,12 +3,12 @@
 
 #include "ActorFrame.h"
 #include "HoldJudgment.h"
+#include "InputEventPlus.h"
+#include "NoteData.h"
 #include "NoteDataWithScoring.h"
 #include "RageSound.h"
-#include "NoteData.h"
 #include "ScreenMessage.h"
 #include "ThemeMetric.h"
-#include "InputEventPlus.h"
 #include "TimingData.h"
 #include <chrono>
 

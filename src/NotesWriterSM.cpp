@@ -1,12 +1,10 @@
 #include "global.h"
-#include <cerrno>
-#include <cstring>
-#include "NotesWriterSM.h"
 #include "BackgroundUtil.h"
 #include "Foreach.h"
 #include "GameManager.h"
 #include "LocalizedString.h"
 #include "NoteTypes.h"
+#include "NotesWriterSM.h"
 #include "Profile.h"
 #include "ProfileManager.h"
 #include "RageFile.h"
@@ -16,6 +14,8 @@
 #include "Song.h"
 #include "Steps.h"
 #include "ThemeMetric.h"
+#include <cerrno>
+#include <cstring>
 
 ThemeMetric<bool> USE_CREDIT	( "NotesWriterSM", "DescriptionUsesCreditField" );
 

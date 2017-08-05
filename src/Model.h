@@ -4,10 +4,10 @@
 #define MODEL_H
 
 #include "Actor.h"
-#include "RageTypes.h"
 #include "ModelTypes.h"
-#include <vector>
+#include "RageTypes.h"
 #include <map>
+#include <vector>
 
 class RageModelGeometry;
 class RageCompiledGeometry;

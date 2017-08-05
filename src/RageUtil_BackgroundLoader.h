@@ -34,7 +34,7 @@ private:
 	RageThread m_LoadThread;
 	bool m_bShutdownThread;
 	void LoadThread();
-	static int LoadThread_Start( void *p ) { ((BackgroundLoader *) p)->LoadThread(); return 0; }
+	static int LoadThread_Start( void *p ) { (reinterpret_cast<BackgroundLoader *>(p))->LoadThread(); return 0; }
 
 	RString GetRequest();
 

@@ -1,10 +1,10 @@
 #include "global.h"
-#include "NotesLoaderSMA.h"
 #include "BackgroundUtil.h"
 #include "GameManager.h"
 #include "MsdFile.h"
 #include "NoteTypes.h"
 #include "NotesLoaderSM.h" // may need this.
+#include "NotesLoaderSMA.h"
 #include "PrefsManager.h"
 #include "RageFileManager.h"
 #include "RageLog.h"

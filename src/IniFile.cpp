@@ -5,11 +5,11 @@ http://en.wikipedia.org/wiki/INI_file
  - backslash followed by a newline doesn't break the line
 */
 #include "global.h"
-#include "IniFile.h"
-#include "RageUtil.h"
-#include "RageLog.h"
-#include "RageFile.h"
 #include "Foreach.h"
+#include "IniFile.h"
+#include "RageFile.h"
+#include "RageLog.h"
+#include "RageUtil.h"
 
 IniFile::IniFile(): XNode("IniFile")
 {
@@ -121,7 +121,7 @@ bool IniFile::WriteFile( const RString &sPath ) const
 
 	bool bSuccess = IniFile::WriteFile( f );
 	int iFlush = f.Flush();
-	bSuccess &= (iFlush != -1);
+	bSuccess &= static_cast<int>(iFlush != -1);
 	return bSuccess;
 }
 

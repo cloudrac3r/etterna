@@ -399,7 +399,7 @@ void CubicSpline::set_results(size_t last, vector<float>& diagonals, vector<floa
 		m_points[i].b= results[i];
 		m_points[i].c= (3 * diff) - (2 * results[i]) - results[next];
 		m_points[i].d= (2 * -diff) + results[i] + results[next];
-#define UNNAN(n) if(n != n) { n = 0.0f; }
+#define UNNAN(n) if((n) != (n)) { (n) = 0.0f; }
 		UNNAN(m_points[i].b);
 		UNNAN(m_points[i].c);
 		UNNAN(m_points[i].d);
@@ -538,8 +538,8 @@ void CubicSplineN::weighted_average(CubicSplineN& out,
 		to.dimension() == from.dimension(),
 		"Cannot tween splines of different dimensions.");
 #define BOOLS_FROM_CLOSEST(closest) \
-	out.set_loop(closest.get_loop()); \
-	out.set_polygonal(closest.get_polygonal());
+	out.set_loop((closest).get_loop()); \
+	out.set_polygonal((closest).get_polygonal());
 	if(between >= 0.5f)
 	{
 		BOOLS_FROM_CLOSEST(to);
@@ -771,7 +771,7 @@ size_t CubicSplineN::dimension() const
 void CubicSplineN::set_##name(bool b) \
 { \
 	m_dirty= true; \
-	member= b; \
+	(member)= b; \
 } \
 bool CubicSplineN::get_##name() const \
 { \

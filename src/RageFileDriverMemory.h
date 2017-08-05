@@ -3,8 +3,8 @@
 #ifndef RAGE_FILE_DRIVER_MEMORY_H
 #define RAGE_FILE_DRIVER_MEMORY_H
 
-#include "RageFileDriver.h"
 #include "RageFileBasic.h"
+#include "RageFileDriver.h"
 #include "RageThreads.h"
 
 struct RageFileObjMemFile;

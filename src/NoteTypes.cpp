@@ -1,9 +1,9 @@
 #include "global.h"
+#include "LocalizedString.h"
+#include "LuaManager.h"
 #include "NoteTypes.h"
 #include "RageUtil.h"
-#include "LuaManager.h"
 #include "XmlFile.h"
-#include "LocalizedString.h"
 
 TapNote TAP_EMPTY	( TapNoteType_Empty,	TapNoteSubType_Invalid,	TapNoteSource_Original, -1 );
 TapNote TAP_ORIGINAL_TAP	( TapNoteType_Tap,	TapNoteSubType_Invalid,	TapNoteSource_Original, -1 );
@@ -126,8 +126,8 @@ static const int ROWS_PER_MEASURE = ROWS_PER_BEAT * BEATS_PER_MEASURE;
 NoteType GetNoteType( int row )
 { 
 	if(	  row % (ROWS_PER_MEASURE/4) == 0)	return NOTE_TYPE_4TH;
-	else if( row % (ROWS_PER_MEASURE/8) == 0)	return NOTE_TYPE_8TH;
-	else if( row % (ROWS_PER_MEASURE/12) == 0)	return NOTE_TYPE_12TH;
+	if( row % (ROWS_PER_MEASURE/8) == 0)	return NOTE_TYPE_8TH;
+	if( row % (ROWS_PER_MEASURE/12) == 0)	return NOTE_TYPE_12TH;
 	else if( row % (ROWS_PER_MEASURE/16) == 0)	return NOTE_TYPE_16TH;
 	else if( row % (ROWS_PER_MEASURE/24) == 0)	return NOTE_TYPE_24TH;
 	else if( row % (ROWS_PER_MEASURE/32) == 0)	return NOTE_TYPE_32ND;

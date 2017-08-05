@@ -1,9 +1,9 @@
 #include "global.h"
-#include "RageSurface_Load_BMP.h"
 #include "RageFile.h"
-#include "RageUtil.h"
 #include "RageLog.h"
 #include "RageSurface.h"
+#include "RageSurface_Load_BMP.h"
+#include "RageUtil.h"
 using namespace FileReading;
 
 /* Tested with http://entropymine.com/jason/bmpsuite/. */

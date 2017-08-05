@@ -1,14 +1,14 @@
 #include "global.h"
-#include "ModIconRow.h"
-#include "ThemeManager.h"
-#include "PlayerOptions.h"
-#include "GameState.h"
-#include "RageLog.h"
-#include "PlayerState.h"
 #include "ActorUtil.h"
-#include "XmlFile.h"
-#include "LuaManager.h"
 #include "Foreach.h"
+#include "GameState.h"
+#include "LuaManager.h"
+#include "ModIconRow.h"
+#include "PlayerOptions.h"
+#include "PlayerState.h"
+#include "RageLog.h"
+#include "ThemeManager.h"
+#include "XmlFile.h"
 
 int OptionToPreferredColumn( RString sOptionText );
 

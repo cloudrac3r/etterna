@@ -5,8 +5,8 @@
 
 #include <map>
 #include <random>
-#include <vector>
 #include <sstream>
+#include <vector>
 class RageFileDriver;
 
 /** @brief Safely delete pointers. */
@@ -451,12 +451,12 @@ void split( const RString &sSource, const RString &sDelimitor, vector<RString>& 
 void split( const wstring &sSource, const wstring &sDelimitor, vector<wstring> &asAddIt, const bool bIgnoreEmpty = true );
 
 /* In-place split. */
-void split( const RString &sSource, const RString &sDelimitor, int &iBegin, int &iSize, const bool bIgnoreEmpty = true );
-void split( const wstring &sSource, const wstring &sDelimitor, int &iBegin, int &iSize, const bool bIgnoreEmpty = true );
+void split( const RString &sSource, const RString &sDelimitor, int &iBegin, int &iSize, bool bIgnoreEmpty = true );
+void split( const wstring &sSource, const wstring &sDelimitor, int &iBegin, int &iSize, bool bIgnoreEmpty = true );
 
 /* In-place split of partial string. */
-void split( const RString &sSource, const RString &sDelimitor, int &iBegin, int &iSize, int iLen, const bool bIgnoreEmpty ); /* no default to avoid ambiguity */
-void split( const wstring &sSource, const wstring &sDelimitor, int &iBegin, int &iSize, int iLen, const bool bIgnoreEmpty );
+void split( const RString &sSource, const RString &sDelimitor, int &iBegin, int &iSize, int iLen, bool bIgnoreEmpty ); /* no default to avoid ambiguity */
+void split( const wstring &sSource, const wstring &sDelimitor, int &iBegin, int &iSize, int iLen, bool bIgnoreEmpty );
 
 // Joins a vector<RString> to create a RString according the Deliminator.
 RString join( const RString &sDelimitor, const vector<RString>& sSource );
@@ -591,13 +591,13 @@ extern unsigned char g_LowerCase[256];
 struct char_traits_char_nocase: public char_traits<char>
 {
 	static inline bool eq( char c1, char c2 )
-	{ return g_UpperCase[(unsigned char)c1] == g_UpperCase[(unsigned char)c2]; }
+	{ return g_UpperCase[static_cast<unsigned char>(c1)]; }
 
 	static inline bool ne( char c1, char c2 )
-	{ return g_UpperCase[(unsigned char)c1] != g_UpperCase[(unsigned char)c2]; }
+	{ return g_UpperCase[static_cast<unsigned char>(c1)]; }
 
 	static inline bool lt( char c1, char c2 )
-	{ return g_UpperCase[(unsigned char)c1] < g_UpperCase[(unsigned char)c2]; }
+	{ return g_UpperCase[static_cast<unsigned char>(c1)]; }
 
 	static int compare( const char* s1, const char* s2, size_t n )
 	{
@@ -613,7 +613,7 @@ struct char_traits_char_nocase: public char_traits<char>
 
 	static inline char fasttoupper(char a)
 	{
-		return g_UpperCase[(unsigned char)a];
+		return g_UpperCase[static_cast<unsigned char>(a)];
 	}
 	
 	static const char *find( const char* s, int n, char a )

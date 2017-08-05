@@ -1,6 +1,6 @@
 #include "global.h"
-#include "RageSoundReader_Extend.h"
 #include "RageLog.h"
+#include "RageSoundReader_Extend.h"
 #include "RageSoundUtil.h"
 #include "RageUtil.h"
 

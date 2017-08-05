@@ -1,15 +1,15 @@
 #include "global.h"
+#include "RageFile.h"
+#include "RageLog.h"
+#include "RageSurface.h"
 #include "RageSurface_Load_JPEG.h"
 #include "RageUtil.h"
-#include "RageLog.h"
-#include "RageFile.h"
-#include "RageSurface.h"
 
 #include <csetjmp>
 
 extern "C" {
-#include "jpeglib.h"
 #include "jerror.h"
+#include "jpeglib.h"
 }
 
 #if defined(WIN32) && !defined(__MINGW32__)
@@ -98,7 +98,7 @@ void RageFile_JPEG_skip_input_data( j_decompress_ptr cinfo, long num_bytes )
 	src->pub.bytes_in_buffer -= in_buffer;
 	num_bytes -= in_buffer;
 
-	if( num_bytes )
+	if( num_bytes != 0 )
 		src->file->Seek( src->file->Tell() + num_bytes );
 }
 

@@ -1,24 +1,24 @@
 #include "global.h"
-#include "NoteField.h"
-#include "RageUtil.h"
-#include "GameConstantsAndTypes.h"
 #include "ArrowEffects.h"
+#include "BackgroundUtil.h"
+#include "CommonMetrics.h"
+#include "GameConstantsAndTypes.h"
 #include "GameManager.h"
 #include "GameState.h"
-#include "RageTimer.h"
+#include "NoteData.h"
+#include "NoteField.h"
+#include "NoteSkinManager.h"
+#include "PlayerState.h"
+#include "RageDisplay.h"
 #include "RageLog.h"
 #include "RageMath.h"
-#include "ThemeManager.h"
-#include "NoteSkinManager.h"
-#include "Song.h"
+#include "RageTimer.h"
+#include "RageUtil.h"
 #include "ScreenDimensions.h"
-#include "PlayerState.h"
+#include "Song.h"
 #include "Style.h"
-#include "CommonMetrics.h"
+#include "ThemeManager.h"
 #include <cfloat>
-#include "BackgroundUtil.h"
-#include "NoteData.h"
-#include "RageDisplay.h"
 
 void FindDisplayedBeats(const PlayerState* pPlayerState, float &firstBeat, float &lastBeat, int iDrawDistanceAfterTargetsPixels, int iDrawDistanceBeforeTargetsPixels);
 
@@ -975,10 +975,10 @@ void NoteField::FadeToFail()
 // return values, since the code would be identical in all of them. -Kyz
 
 #define OPEN_CALLBACK_BLOCK(member_name) \
-	if(!from_lua && !member_name.IsNil()) \
+	if(!from_lua && !(member_name).IsNil()) \
 	{ \
 		Lua* L= LUA->Get(); \
-		member_name.PushSelf(L);
+		(member_name).PushSelf(L);
 
 #define OPEN_RUN_BLOCK(arg_count) \
 	RString error= "Error running callback: "; \
@@ -990,7 +990,7 @@ void NoteField::FadeToFail()
 
 static void get_returned_column(Lua* L, PlayerNumber pn, int index, int& col)
 {
-	if(lua_isnumber(L, index))
+	if(lua_isnumber(L, index) != 0)
 	{
 		// 1-indexed columns in lua
 		int tmpcol= lua_tonumber(L, index) - 1;
@@ -1022,7 +1022,7 @@ static void get_returned_bright(Lua* L, int index, bool& bright)
 {
 	if(lua_isboolean(L, index))
 	{
-		bright= lua_toboolean(L, index);
+		bright= (lua_toboolean(L, index) != 0);
 	}
 }
 
@@ -1051,7 +1051,7 @@ void NoteField::DidTapNote(int col, TapNoteScore score, bool bright, bool from_l
 	OPEN_CALLBACK_BLOCK(m_DidTapNoteCallback);
 	PUSH_COLUMN;
 	Enum::Push(L, score);
-	lua_pushboolean(L, bright);
+	lua_pushboolean(L, static_cast<int>(bright));
 	OPEN_RUN_BLOCK(3);
 	get_returned_column(L, m_pPlayerState->m_PlayerNumber, 1, col);
 	get_returned_score(L, 2, score);
@@ -1064,7 +1064,7 @@ void NoteField::DidHoldNote(int col, HoldNoteScore score, bool bright, bool from
 	OPEN_CALLBACK_BLOCK(m_DidHoldNoteCallback);
 	PUSH_COLUMN;
 	Enum::Push(L, score);
-	lua_pushboolean(L, bright);
+	lua_pushboolean(L, static_cast<int>(bright));
 	OPEN_RUN_BLOCK(3);
 	get_returned_column(L, m_pPlayerState->m_PlayerNumber, 1, col);
 	get_returned_score(L, 2, score);
